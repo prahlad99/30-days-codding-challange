@@ -1,0 +1,73 @@
+10. Possible paths between 2 vertices 
+Medium Accuracy: 56.92% Submissions: 7500 Points: 4
+Given a Directed Graph. Count the total number of ways or paths that exist between two vertices in the directed graph. These paths doesn’t contain any cycle.
+Note: Graph doesn't contain multiple edges, self loop and cycles and the two vertices( source and destination) are denoted in the example.
+
+
+Example 1:
+
+Input:
+
+Output: 4
+Explanation: 
+There are 4 paths from 0 to 4.
+0 -> 4
+0 -> 1 -> 4
+0 -> 2 -> 4
+0 -> 1 -> 3 -> 2 -> 4
+
+Example 2:
+
+Input:
+
+Output: 3
+Explanation:
+There are 3 paths from 0 to 3.
+0 -> 3
+0 -> 1 -> 3
+0 -> 1 -> 2 -> 3
+
+Your task:
+You don’t need to read input or print anything. Your task is to complete the function countPaths() which takes the integer V denoting the number of vertices and adjacency list as input parameters and returns  the count of  the number of paths in the graph from the source vertex to the destination vertex.
+
+
+Expected Time Complexity: O(V!)
+Expected Auxiliary Space: O(V)
+
+
+Constraints:
+1 ≤ V, E ≤ 100
+1 ≤ source, destination ≤ V
+
+
+
+
+
+
+  public:
+    void dfs(int V,vector<int> adj[],int source ,int destination,int &res,int visited[]){
+    visited[source]=1;
+    if(source==destination)
+    {
+        res++;
+        return ;
+    }
+    for( int v:adj[source])
+    {
+        
+        dfs(V,adj,v,destination,res,visited);
+        // visited[v]=true;}
+    }
+    }
+    //Function to count paths between two vertices in a directed graph.
+	int countPaths(int V, vector<int> adj[], int source, int destination)
+	{
+	    // Code here
+	    int visited[V]={0};
+	    int res=0;
+	   dfs(V,adj,source,destination,res,visited);
+	   return res;
+	}
+};
+
+Topic Tags

@@ -1,0 +1,42 @@
+class Solution {
+public:
+    struct triplet{
+        int val,apos,vpos;
+        triplet(int v,int ap,int vp)
+        {
+            val=v;
+            apos=ap;
+            vpos=vp;
+        }
+        
+    };
+struct compare{
+    bool operator()(triplet & t1,triplet&t2)
+    {
+  return t1.val>t2.val;   
+    }
+};
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        priority_queue<triplet,vector<triplet>,compare>pq;
+        int i=0;
+        for(auto a:matrix)
+        {
+            triplet t(a[0],i++,0);
+            pq.push(t);
+        }
+        vector<int>res;
+    while(!pq.empty()){
+        triplet curr=pq.top();
+        res.push_back(curr.val);
+        pq.pop();
+        int ap=curr.apos;
+        int vp=curr.vpos;
+        if(vp+1<matrix[ap].size())
+        {
+            triplet t(matrix[ap][vp+1],ap,vp+1);
+            pq.push(t);
+        }
+    }
+        return res[k-1];
+    }
+};

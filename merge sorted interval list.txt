@@ -1,0 +1,32 @@
+ struct mycp{
+        bool operator()( ListNode* t1,ListNode* t2){
+           return  t1->val>t2->val;
+        }};
+    
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+      
+           
+        priority_queue<ListNode*,vector<ListNode*>,mycp>pq;
+        int i=0;
+        for(auto a:lists)
+        {   
+            if(a)
+                pq.push(a);
+        }      
+        if(pq.empty())
+            return NULL;
+        ListNode*result=pq.top();
+        pq.pop();
+    if(result->next)
+        pq.push(result->next);
+        ListNode *taIL=result;
+        while(!pq.empty()){
+            taIL->next=pq.top();
+            pq.pop();
+            taIL=taIL->next;
+            if(taIL->next)
+                pq.push(taIL->next);
+        }
+        return result;
+    }
+};
